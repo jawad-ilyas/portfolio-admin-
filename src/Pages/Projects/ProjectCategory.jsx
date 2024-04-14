@@ -49,6 +49,7 @@ function ProjectCategory() {
                 <input className='bg-slate-200  py-2 px-4 rounded-xl' placeholder='project Category Description ' {...register("projectCategoryDescription")} />
 
 
+              
                 <input type="submit" className='hover:bg-white hover:text-blue-300 duration-300 hover:border-2 bg-blue-300 shadow-sm inline-block py-2 px-3 w-24 text-center rounded-lg mx-auto' />
             </form>
         </div>

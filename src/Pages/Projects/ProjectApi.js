@@ -67,4 +67,24 @@ const deleteProjectCategory = async (_id) => {
 }
 
 
-export { fetchProjectCategory, deleteProjectCategory, createProjectCategory }
+const createProjects = async (data) => {
+
+
+    // console.log("data into create project api call function ", data)
+
+    try {
+
+        return await axios.post("http://localhost:8080/api/v1/project/createProjects", data)
+            .then((response) => {
+                return response
+            })
+            .catch((error) => {
+
+                console.log("Error into project creation ", error)
+            })
+    } catch (error) {
+        console.log("Error into project creation ", error)
+    }
+}
+
+export { fetchProjectCategory, deleteProjectCategory, createProjectCategory, createProjects }
