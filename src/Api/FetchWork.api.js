@@ -9,7 +9,7 @@ const ShowWorkData = async () => {
     }).catch((error) => {
         console.log("Error into show response data", error)
     })
-    console.log(response)
+    // console.log(response)
     return response
 }
 
