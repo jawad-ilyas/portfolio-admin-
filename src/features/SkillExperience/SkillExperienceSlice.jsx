@@ -30,6 +30,21 @@ export const fetchExperience = createAsyncThunk("workExperience/fetchExperience"
         }
     }
 )
+export const fetchSkill = createAsyncThunk("workExperience/fetchSkill",
+
+
+    async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/skill/fetchskill'); // Replace with your API endpoint
+
+            console.log("fetch skill into skill experience ", response.data)
+            return response?.data?.data
+        } catch (error) {
+            throw error;
+
+        }
+    }
+)
 
 
 // Async thunk to delete work experience data
@@ -61,6 +76,7 @@ export const deleteExperience = createAsyncThunk(
 const initialState = ({
     items: [],
     works: [],
+    skills:[],
     status: 'idle',
     error: null,
 })
@@ -96,6 +112,17 @@ const skillExperienceSlice = createSlice({
                 state.items = action.payload;
             })
             .addCase(fetchWorkExperience.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(fetchSkill.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchSkill.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.skills = action.payload;
+            })
+            .addCase(fetchSkill.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })
