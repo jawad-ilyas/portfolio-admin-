@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchSkill } from '../../features/SkillExperience/SkillExperienceSlice';
 
 function Skills() {
-  const { register, handleSubmit, formState: { errors } , reset } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const skills = useSelector((state) => state.skillExperience.skills);
   const dispatch = useDispatch();
 
@@ -32,10 +32,10 @@ function Skills() {
 
     reset();
   };
-  useEffect(()=>{
+  useEffect(() => {
 
     dispatch(fetchSkill())
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <div className='container pt-3 pb-3'>
@@ -94,7 +94,7 @@ function Skills() {
           <div className="container mx-auto px-4">
             <h1 className="text-2xl font-semibold mb-4">Skills</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {skills.map((skill , index) => (
+              {skills.map((skill, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center">
                   <img src={skill.icon} alt={skill.skillName} className="w-16 h-16 mb-2" />
                   <span className="text-lg font-semibold">{skill.skillName}</span>

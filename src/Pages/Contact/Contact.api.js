@@ -11,10 +11,10 @@ const fetchNewsLetterAdmin = async () => {
     }
 };
 
-const deleteNewsLetter = async (id)=>{
+const deleteNewsLetter = async (id) => {
     console.log(id)
     try {
-        const response = await axios.post("http://localhost:8080/api/v1/mewsletter/deletenewsnetter", {id});
+        const response = await axios.post("http://localhost:8080/api/v1/mewsletter/deletenewsnetter", { id });
         // console.log("fetch api response of the newsletter api", response.data?.data);
         return response?.success;
     } catch (error) {

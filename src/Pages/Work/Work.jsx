@@ -31,8 +31,12 @@ const Work = () => {
 
         })
             .then(function (response) {
-                console.log(response);
-               
+                console.log("work creation response ", response?.data?.success)
+                // console.log(response);
+                if (response?.data?.success === true) {
+
+                }
+
             })
             .catch(function (error) {
                 console.log(error);

@@ -24,7 +24,7 @@ const createWorkExperience = async (data) => {
 
 const createWork = async (data) => {
 
-    console.log("create data into create work api function " , data)
+    console.log("create data into create work api function ", data)
     try {
         return await axios.post("http://localhost:8080/api/v1/experience/creatework", data)
             .then((response) => {

@@ -76,7 +76,7 @@ export const deleteExperience = createAsyncThunk(
 const initialState = ({
     items: [],
     works: [],
-    skills:[],
+    skills: [],
     status: 'idle',
     error: null,
 })
