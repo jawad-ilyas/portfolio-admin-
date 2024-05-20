@@ -3,12 +3,14 @@ import modelReducer from "../features/model/modelSlice"
 import projectReducer from "../features/Project/projectSlice"
 import contactReducer from "../features/Contact/ContactSlice"
 import SkillExperienceReducer from "../features/SkillExperience/SkillExperienceSlice"
+import SkillReducer from "../features/Skill/SkillSlice"
 export const store = configureStore({
     reducer: {
         model: modelReducer,
         project: projectReducer,
         contact: contactReducer,
-        skillExperience: SkillExperienceReducer
+        skillExperience: SkillExperienceReducer,
+        skill: SkillReducer,
     }
 
 })

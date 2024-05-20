@@ -3,36 +3,38 @@ import Button from '../../Components/Button/Button'
 import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { useDispatch, useSelector } from 'react-redux'
-import { createSkill, fetchSKill } from '../../features/Skill/SkillSlice';
-import ShowSkill from './ShowSkill';
+import { fetchSkill } from '../../features/SkillExperience/SkillExperienceSlice';
 
 function Skills() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const skills = useSelector((state) => state.skillExperience.skills);
   const dispatch = useDispatch();
 
-  const { skills, loading, error } = useSelector((state) => state.skill);
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log(data);
     const formData = new FormData();
     formData.append('skillName', data.skillName);
 
     formData.append('icon', data.icon[0]);
 
-    await dispatch(createSkill(formData));
+    axios.post('http://localhost:8080/api/v1/skill/createskill', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
 
+    }).then((response) => {
+      console.log(response)
+      console.log("response after update the model ", response.data)
+    })
 
-    if (!loading) {
-
-      dispatch(fetchSKill());
-      reset();
-    }
+    console.log("skills ui data", data)
+    dispatch(fetchSkill())
 
     reset();
   };
-
-
   useEffect(() => {
-    dispatch(fetchSKill());
+
+    dispatch(fetchSkill())
   }, [dispatch])
 
   return (
@@ -89,14 +91,17 @@ function Skills() {
               />
             </form>
           </div>
-          {skills?.length != 0 && <div className="container mx-auto px-4">
+          {/* <div className="container mx-auto px-4">
             <h1 className="text-2xl font-semibold mb-4">Skills</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {skills?.map((skill, index) => (
-                <ShowSkill key={index} skill={skill} index={index} />
+              {skills.map((skill, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center">
+                  <img src={skill.icon} alt={skill.skillName} className="w-16 h-16 mb-2" />
+                  <span className="text-lg font-semibold">{skill.skillName}</span>
+                </div>
               ))}
             </div>
-          </div>}
+          </div> */}
         </div>
       </div>
     </div>

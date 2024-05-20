@@ -11,6 +11,7 @@ const Work = () => {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm()
 
@@ -34,7 +35,8 @@ const Work = () => {
                 console.log("work creation response ", response?.data?.success)
                 // console.log(response);
                 if (response?.data?.success === true) {
-
+                    reset();
+                    ShowWorkData();
                 }
 
             })

@@ -15,7 +15,7 @@ function ShowWork() {
     const [showModel, setShowModel] = useState(false)
     const [updateData, setUpdateData] = useState({});
 
-    console.log("showModel into showWork.jsx", showModel)
+    // console.log("showModel into showWork.jsx", showModel)
     // handle delete
 
     const deleteSweetAlert = (key) => {
@@ -39,13 +39,11 @@ function ShowWork() {
     }
 
     const handleDelete = (key) => {
-        console.log(key)
 
 
         axios.post("http://localhost:8080/api/v1/work/deleteWork", {
             _id: key
         }).then((response) => {
-            console.log(response.data.data)
             setShowData(response.data.data)
             setIsloading(false)
         }).catch((error) => {
