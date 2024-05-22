@@ -1,18 +1,48 @@
 import React from 'react'
 import swal from 'sweetalert';
+import { deleteProjectCategory, fetchProjectCategory } from './ProjectApi';
+import { addDataIntoProjectCategory } from '../../features/Project/projectSlice';
 
 import { useDispatch, useSelector } from "react-redux"
-import { deleteProjectCategory, showProjectCategrory } from '../../features/projectCategory/projectCategorySlice';
 
 
 
 function ProjectButton({ projectCategoryName, projectCategoryDescription, _id }) {
 
 
+    const dispatch = useDispatch();
+
+    // ! Actual function for the delete 
+    const deleteFunction = (_id) => {
+
+        console.log("Project button delete functionality key : ", _id)
+
+        const fetchDeleteProjectCategory = async () => {
+            const respones = await deleteProjectCategory(_id)
+            console.log(respones.data);
+            if (respones.data.success === true) {
+
+                const fetchProjectCategoryApiResponse = async () => {
+                    try {
+                        const response = await fetchProjectCategory();
+                        console.log("response of the fetch project categories into delete", response);
+
+                        dispatch(addDataIntoProjectCategory(response))
+                        // Assuming you want to set state here
+                    } catch (error) {
+                        console.log("Error fetching project categories:", error);
+                    }
+                };
+
+                fetchProjectCategoryApiResponse();
+            }
+        }
+        fetchDeleteProjectCategory();
 
 
-    const dispatch = useDispatch()
 
+
+    }
 
     // ? Function used for the show popup to user before delete 
     const deleteSweetAlert = (_id) => {
@@ -23,15 +53,14 @@ function ProjectButton({ projectCategoryName, projectCategoryDescription, _id })
             buttons: true,
             dangerMode: true,
         })
-            .then(async (willDelete) => {
+            .then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your Project Category is Deleted !", {
+                    swal("Poof! Your imaginary file has been deleted!", {
                         icon: "success",
                     });
-                    await dispatch(deleteProjectCategory(_id))
-                    dispatch(showProjectCategrory())
+                    deleteFunction(_id)
                 } else {
-                    swal("Your Project Category  is safe!");
+                    swal("Your imaginary file is safe!");
                 }
             });
     }
